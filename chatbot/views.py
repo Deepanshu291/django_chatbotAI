@@ -14,7 +14,7 @@ from .serializers import RegisterSerializer, UserSerializer, ChatSessionSerializ
 from rest_framework.parsers import MultiPartParser, FormParser , JSONParser
 
 
-configure(api_key="")
+configure(api_key="AIzaSyCJkMgQS6yRiuvoSLQnmNVX-2NGu-7KZKc")
 gemini_model = GenerativeModel("gemini-2.0-flash")
 
 class RegisterAPIView(generics.CreateAPIView):
@@ -44,8 +44,8 @@ class LoginAPIView(generics.GenericAPIView):
 class ChatSessionListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = ChatSessionSerializer
     permission_classes = [IsAuthenticated]
-    authentication_classes = [JWTAuthentication,SessionAuthentication,BasicAuthentication]
-    parser_classes = [MultiPartParser,FormParser]
+    # authentication_classes = [JWTAuthentication,SessionAuthentication,BasicAuthentication]
+    parser_classes = [MultiPartParser,FormParser,JSONParser]
     def get_queryset(self):
         return ChatSession.objects.filter(user=self.request.user)
 
